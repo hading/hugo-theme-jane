@@ -13,6 +13,9 @@ copyright = ""            # default: params.author.name ↓ # 默认为下面配
 enableGitInfo = true      # use git commit log to generate lastmod record # 可根据 Git 中的提交生成最近更新记录。
 # uglyURLs = true         # more info: https://gohugo.io/content-management/urls/#ugly-urls
 
+[pagination]
+  pagerSize = 5           # Number of articles displayed on the homepage  # 首页每页显示的文章数
+
 # Enable author pages
 #[taxonomies]
 #  author = "author"
@@ -44,11 +47,6 @@ defaultContentLanguage = "en"           # Default language to use
   weight = 30
   identifier = "tags"
   pageref = "/tags/"
-[[menu.main]]
-  name = "Categories"
-  weight = 40
-  identifier = "categories"
-  pageref = "/categories/"
 [[menu.main]]
   name = "external-link"
   weight = 50
@@ -127,8 +125,6 @@ defaultContentLanguage = "en"           # Default language to use
 
   [params.publicCDN]        # load these files from public cdn                          # 启用公共CDN，需自行定义
     enable = false
-    jquery = '<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'
-    slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
     gitmentJS = '<script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js" crossorigin="anonymous"></script>'
     gitmentCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css" crossorigin="anonymous">'
     photoswipe = '<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.js" integrity="sha256-AC9ChpELidrhGHX23ZU53vmRdz3FhKaN9E28+BbcWBw=" crossorigin="anonymous"></script>'

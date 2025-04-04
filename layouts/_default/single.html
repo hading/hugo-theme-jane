@@ -1,5 +1,9 @@
 {{ define "content" -}}
   <div class="content-wrapper">
+    <aside class="left-sidebar">
+      {{ partial "sidebar/post_left_sidebar.html" . }}
+    </aside>
+
     <div id="content" class="content">
       <article class="post">
         <!-- post-header -->
@@ -27,7 +31,9 @@
             <div class="post-tags">
               {{ range . }}
                 {{- $name := . -}}
-                {{- with $.Site.GetPage "taxonomy" (printf "tags/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "tags/%s" ($name | urlize))) -}}
+                {{- with $.Site.GetPage "taxonomy" (printf "tags/%s" $name) | default ($.Site.GetPage "taxonomy" (printf
+                  "tags/%s" ($name | urlize)))
+                -}}
                   <a href="{{ .Permalink }}">{{ $name }}</a>
                 {{ end -}}
               {{ end }}
@@ -41,7 +47,10 @@
               <a class="prev" href="{{ .RelPermalink }}">
                 {{/* icon left */}}
                 <i class="iconfont">
-                  {{ partial "svg/left.svg" }}
+                  {{ partial "icons/icon" (dict
+                    "path" "icons/post/chevron-left.svg"
+                    )
+                  }}
                 </i>
                 <span class="prev-text nav-default">{{ .Title }}</span>
                 <span class="prev-text nav-mobile">{{ i18n "prev_post" }}</span>
@@ -53,7 +62,10 @@
                 <span class="prev-text nav-mobile">{{ i18n "next_post" }}</span>
                 {{/* icon right */}}
                 <i class="iconfont">
-                  {{ partial "svg/right.svg" }}
+                  {{ partial "icons/icon" (dict
+                    "path" "icons/post/chevron-right.svg"
+                    )
+                  }}
                 </i>
               </a>
             {{- end }}
@@ -62,8 +74,10 @@
       </article>
 
       <!-- Author Info -->
-      {{ if and (.Site.Params.author.name | default .Site.Params.Author.name) (.Params.showAuthorInfo | default .Site.Params.showAuthorInfo) }}
-        {{ partial "author_info.html" (dict "author" (.Site.Params.author.name | default .Site.Params.Author.name) "context" $) }}
+      {{ if and ( .Params.author | default .Site.Params.author.name ) (.Params.showAuthorInfo | default
+        .Site.Params.showAuthorInfo)
+      }}
+        {{ partial "author_info.html" (dict "author" (.Params.author | default .Site.Params.author.name ) "context" $) }}
       {{ end }}
 
 
@@ -72,8 +86,8 @@
 
     </div>
 
-    <!-- TOC -->
-    {{ partial "post/toc.html" . }}
-
+    <aside class="right-sidebar">
+      {{ partial "sidebar/post_right_sidebar.html" . }}
+    </aside>
   </div>
 {{- end }}

@@ -1,59 +1,51 @@
 <!DOCTYPE html>
-<html
-  lang="{{ $.Site.LanguageCode | default "en" }}"
-  itemscope
-  itemtype="http://schema.org/WebPage"
->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>
-      {{- block "title" . -}}
-        {{ if .IsPage }}
-          {{ .Title }} - {{ .Site.Title }}
-        {{ else }}
-          {{ .Site.Title }}
-        {{ end }}
-      {{- end -}}
-    </title>
-    {{ partial "head.html" . }}
-  </head>
-  <body>
-    <div id="back-to-top"></div>
+<html lang="{{ $.Site.LanguageCode | default `en` }}" itemscope itemtype="http://schema.org/WebPage" data-theme="light">
 
-    {{ partial "slideout.html" . }}
-
-    {{ if or .Site.Params.photoswipe .Site.Params.fancybox }}
-      {{ partial "photoswipe.html" . }}
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>
+    {{/*  block not work in partials
+        see: https://github.com/gohugoio/hugo/issues/7936
+    */}}
+    {{- block "title" . -}}
+    {{ if .IsPage }}
+    {{ .Title }} - {{ .Site.Title }}
+    {{ else }}
+    {{ .Site.Title }}
     {{ end }}
+    {{- end -}}
+  </title>
+  {{ partial "head.html" . }}
+</head>
 
-    {{ if .Site.Params.search.google.enable }}
-      {{ partial "search_google.html" . }}
-    {{ end }}
+<body>
+  <div id="back-to-top"></div>
 
-    <header id="header" class="header">
-      {{ partial "header.html" . }}
-    </header>
+  <header class="site-header">
+    {{ partial "desktop_header.html" . }}
+    {{ partial "mobile_header.html" . }}
+  </header>
 
-    <div id="mobile-panel">
-      <main id="main" class="main bg-llight wallpaper">
-        {{ block "content" . }}{{ end }}
+  {{/* {{ if or .Site.Params.photoswipe .Site.Params.fancybox }}
+  {{ partial "photoswipe.html" . }}
+  {{ end }} */}}
 
-      </main>
+  {{ if .Site.Params.search.google.enable }}
+    {{ partial "search_google.html" . }}
+  {{ end }}
 
-      <footer id="footer" class="footer">
-        {{ partial "footer.html" . }}
-      </footer>
 
-      <div class="button__back-to-top">
-        <a href="#back-to-top">
-          <i class="iconfont">
-            {{/* icon up */}}
-            {{ partial "svg/up.svg" }}
-          </i>
-        </a>
-      </div>
-    </div>
-    {{ partial "scripts.html" . }}
-  </body>
+
+  <main id="main" class="main pico container">
+    {{ block "content" . }}{{ end }}
+  </main>
+
+  <footer id="footer" class="site-footer">
+    {{ partial "footer.html" . }}
+  </footer>
+
+  {{ partial "scripts.html" . }}
+</body>
+
 </html>
