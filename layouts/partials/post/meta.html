@@ -24,11 +24,6 @@
     {{ $author_name | safeHTML }}
     {{ end }}
   </div>
-  {{ if .Params.read_by }}
-  <div>
-	  read by: {{ .Params.read_by }}
-  </div>
-  {{ end}}
 
   <div class="post-meta-item post-meta-time">
     {{ partial "icons/icon" (dict
